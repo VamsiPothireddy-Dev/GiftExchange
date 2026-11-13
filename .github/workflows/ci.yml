@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    uses: VamsiPothireddy-Dev/github-actions/.github/workflows/build-deploy.yml@main
+    with:
+      app-name: giftexchange
+      image-name: vamsipothireddy/giftexchange
+      service-port: 5001
+      target-port: 5001
+      istio-host: api.vamsipothireddy.com
+      istio-path-prefix: /giftexchange
+      namespace: default
+    secrets: inherit
